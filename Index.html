@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Flashcard Generator</title>
+
+<link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+
+<script>
+
+function flipCard(id){
+
+let answer = document.getElementById(id)
+
+if(answer.style.display === "none"){
+answer.style.display = "block"
+}
+else{
+answer.style.display = "none"
+}
+
+}
+
+</script>
+
+</head>
+
+<body>
+
+<h1>Flashcard Generator</h1>
+
+<form method="POST">
+
+<textarea name="text" placeholder="Paste your notes here"></textarea>
+
+<br>
+
+<button type="submit">Generate Flashcards</button>
+
+</form>
+
+<hr>
+
+<div class="cards">
+
+{% for card in flashcards %}
+
+<div class="card" onclick="flipCard('a{{loop.index}}')">
+
+<h3>{{card.question}}</h3>
+
+<p id="a{{loop.index}}" class="answer">
+{{card.answer}}
+</p>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</body>
+
+</html>
